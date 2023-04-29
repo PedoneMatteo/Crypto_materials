@@ -13,13 +13,14 @@ ciphertext = cipher.encrypt(plaintext)
 
 nonceb64 = base64.b64encode(cipher.nonce).decode()
 ciphertextb64 = base64.b64encode(ciphertext).decode()
-result = json.dumps({'nonce':nonceb64, 'ciphertext':ciphertextb64})
+result = json.dumps({'nonce':nonceb64, 'ciphertext':ciphertextb64}) #ALLOWS TO ENCODE THE DICTIONARY
 print(result)
 
+#THE RECIPIENT HAS RECEIVED result...ready ti decrypt
 
 #unpack and decipher
-b64 = json.loads(result)
-ciphertext2 = base64.b64decode(b64['ciphertext'])
+b64 = json.loads(result)    #NOW IN b64 THERE IS EXACTLY THE DATA STRUCTURE: {'nonce':nonceb64, 'ciphertext':ciphertextb64}
+ciphertext2 = base64.b64decode(b64['ciphertext']) #WITH THE WORD 'ciphertext' OR 'nonce' A SPECIFIC PART OF JSON CAN BE ACCESSED (ciphertextb64 o nonceb64 rispettivamente)
 nonce2 = base64.b64decode(b64['nonce'])
 print(nonce2)
 print(nonce)

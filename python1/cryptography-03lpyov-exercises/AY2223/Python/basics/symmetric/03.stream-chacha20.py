@@ -5,7 +5,7 @@ from Crypto.Random import get_random_bytes
 
 
 plaintext = b'This is the secret message to encrypt'
-
+plaintext2 = b'This is additional text to encrypt'
 key = get_random_bytes(ChaCha20.key_size)
 
 cipher = ChaCha20.new(key=key) #nonce is automatically generated
@@ -15,10 +15,11 @@ cipher = ChaCha20.new(key=key) #nonce is automatically generated
 # cipher = ChaCha20.new(nonce=nonce, secret=secret)
 
 ciphertext = cipher.encrypt(plaintext)
+ciphertext += cipher.encrypt(plaintext2)    #concatenation beetween encryption of plaintext and plaintext2
 
 print("Ciphertext= "+base64.b64encode(ciphertext).decode())
 print("Nonce=      "+base64.b64encode(cipher.nonce).decode())
 
-print(sys.getsizeof(plaintext),end=" ")
+print(sys.getsizeof(plaintext), end=" ")
 print(sys.getsizeof(ciphertext))
 print(len(cipher.nonce))
