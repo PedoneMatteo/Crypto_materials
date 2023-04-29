@@ -7,16 +7,17 @@ from Crypto.Random import get_random_bytes
 
 # here we are the senders / originators
 header = b"this is the authentication only part"
-data = b"this is the secret part"
+data = b"this is the secret part"   #NEEDS CONFIDENTIALITY
 
 key = get_random_bytes(AES.key_size[2])
-cipher = AES.new(key, AES.MODE_GCM)
+cipher = AES.new(key, AES.MODE_GCM) #don't explicit use iv
 cipher.update(header) #this is to load the data that only need authentication and integrity
 ciphertext, tag = cipher.encrypt_and_digest(data) # this is to add the data to also encrypt and get the outputs
+#tag is another name to say MAC
 
 json_k =  [ 'nonce', 'header', 'ciphertext', 'tag' ]
 outputs = [cipher.nonce, header, ciphertext, tag]
-json_v = [ b64encode(x).decode() for x in outputs ]
+json_v = [ b64encode(x).decode() for x in outputs ] #ENCODE IN B64 THE LIST OF outputs
 json_object  = json.dumps(dict(zip(json_k, json_v)))
 print(json_object)
 

@@ -1,4 +1,4 @@
-from Crypto.Protocol.KDF import scrypt
+from Crypto.Protocol.KDF import scrypt #
 from Crypto.Random import get_random_bytes
 
 password = b'W34kpassw0rd!'
