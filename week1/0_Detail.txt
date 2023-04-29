@@ -1,0 +1,4 @@
+enc1 = simple encrypt
+enc2 = simple encrypt + handle errors
+enc3 = encryption of data that are stored in file
+dec1 = simple  decrypt
