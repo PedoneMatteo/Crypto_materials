@@ -1,4 +1,4 @@
-from Crypto.Hash import SHA512
+from Crypto.Hash import SHA512 #
 from Crypto.Protocol.KDF import scrypt
 from Crypto.Random import get_random_bytes
 from cryptography.hazmat.backends import default_backend
@@ -35,7 +35,7 @@ salt = get_random_bytes(16)
 hkey1 = HKDF_pycrypto(shared_key, 32, salt, SHA512, 1)
 
 # hazmat
-kdf1 = HKDF(algorithm=hashes.SHA256(),length=32,salt=None,info=b'handshake data',backend=default_backend())
+kdf1 = HKDF(algorithm=hashes.SHA256(),length=32,salt=None,info=b'handshake data',backend=default_backend())     #OGGETO PER FARE LA KEY DERIVATION
 derived_key = kdf1.derive(shared_key)
 print(derived_key)
 

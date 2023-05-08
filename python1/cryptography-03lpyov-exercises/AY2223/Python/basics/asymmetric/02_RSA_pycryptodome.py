@@ -5,7 +5,7 @@ from Crypto.Cipher import PKCS1_OAEP
 
 
 #generate a new private key
-key = RSA.generate(2048) #e=65537 by default
+key = RSA.generate(2048) #e=65537 by default  #se non si passa in modo esplicito e, esso assume il valore 2048
 print(key.export_key(format = 'PEM',pkcs=8))
 
 # save in PEM into a file
@@ -18,11 +18,11 @@ f = open('mykey.pem','r')
 key = RSA.import_key(f.read(),passphrase='longpassphrasehere')
 
 #print the parameters
-print(key.n)
-print(key.e)
-print(key.d)
-print(key.p)
-print(key.q)
+print(key.n)    #modulus
+print(key.e)    #public parameter
+print(key.d)    #private parameter
+print(key.p)    #prime number
+print(key.q)    #prime number
 
 
 #create a given when you know all the parameters
@@ -83,3 +83,5 @@ ciphertext = cipher_public.encrypt(message)
 cipher_private = PKCS1_OAEP.new(key)
 message_dec = cipher_private.decrypt(ciphertext)
 print(message_dec)
+
+

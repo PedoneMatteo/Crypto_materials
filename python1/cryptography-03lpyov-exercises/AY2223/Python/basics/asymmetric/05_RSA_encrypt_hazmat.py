@@ -16,7 +16,7 @@ public_key = private_key.public_key()
 
 message = b"encrypted data"
 
-ciphertext = public_key.encrypt(
+ciphertext = public_key.encrypt( #
     message,
     padding.OAEP(
         mgf=padding.MGF1(algorithm=hashes.SHA256()),
