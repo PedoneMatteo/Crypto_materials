@@ -1,3 +1,5 @@
+#PREFIX + INPUT + POSTFIX
+
 import os
 os.environ['PWNLIB_NOTERM'] = 'True'  # Configuration patch to allow pwntools to be run inside of an IDE
 os.environ['PWNLIB_SILENT'] = 'True'
@@ -14,20 +16,21 @@ BLOCK_SIZE = AES.block_size
 BLOCK_SIZE_HEX = 2*BLOCK_SIZE
 
 
-server = remote(HOST, PORT)
+server = remote(HOST, PORT) #create a connection with the server
 
 # stole from the server code...
 # message = "This is what I received: " + msg + " -- END OF MESSAGE"
-start_str = "This is what I received: "
+start_str = "This is what I received: "                                     #INPUT MESSAGE
 # print(len(start_str))
 pad_len = ceil(len(start_str)/BLOCK_SIZE)*BLOCK_SIZE-len(start_str)
 
 msg = b"A"*(16*2+pad_len) #2 * AES.block_size + oad_len
 print("Sending: "+str(msg))
-server.send(msg)
+
+server.send(msg)                                                            #SENDING THE MESSAGE TO THE SERVER
 
 
-ciphertext = server.recv(1024)
+ciphertext = server.recv(1024)                                              #RECEIVE THE MESSAGE FROM THE SERVER
 ciphertext_hex = ciphertext.hex()
 print(ciphertext_hex)
 
