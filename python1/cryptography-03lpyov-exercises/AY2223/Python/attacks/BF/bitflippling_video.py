@@ -11,16 +11,16 @@ if __name__ == '__main__':
     key = get_random_bytes(32)
     nonce = get_random_bytes(12)
     cipher = ChaCha20.new(key = key, nonce = nonce)
-    ciphertext = cipher.encrypt(plaintext)
+    ciphertext = cipher.encrypt(plaintext)  #THIS IS NO MODIFIABLE
 
-    # ciphertext, index, b'1'
+    # SUPPOSING THAT THE ATTACCKER KNOWS THE ciphertext, THE index, AND THE SPECIFIC VALUE b'1' AT THAT INDEX
 
     new_value = b'9'
-    new_int = ord(new_value) # ASCII code
+    new_int = ord(new_value) # ASCII code OF NEW_VALUE. THIS CONVERSION IS NEEDED TO DO A XOR OPERATION
 
-    mask = ord(b'1') ^ new_int
+    mask = ord(b'1') ^ new_int  #XOR
 
-    edt_ciphertext = bytearray(ciphertext)
+    edt_ciphertext = bytearray(ciphertext)  #A COPY MODIFIABLE OF CIPHERTEXT
     edt_ciphertext[index] = ciphertext[index] ^ mask
 
     # edt_ciphertext is received by the recipient,

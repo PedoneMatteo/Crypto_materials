@@ -31,11 +31,11 @@ while 1:
 
         # receives the username from the client
         username = conn.recv(1024)
-        cookie = b'username='+username+b',admin=0'
+        cookie = b'username='+username+b',admin=0'  #BILDING A COOKIE
         print(cookie)
 
         # encrypt cookie info
-        cipher = AES.new(bf_key,AES.MODE_CBC,bf_iv)
+        cipher = AES.new(bf_key,AES.MODE_CBC,bf_iv) #ENCRYPTING COOKIE
         ciphertext = cipher.encrypt(pad(cookie,AES.block_size))
 
         #send the encrypted cookie to the client

@@ -37,7 +37,7 @@ if __name__ == '__main__':
     username = b'aldooo11'
     cookie = pad(b'username=' + username + b',admin=0', AES.block_size)
     print(cookie)
-    print(cookie[:16], end=' || ')
+    print(cookie[:16], end=' || ')  #SEPARATOR ||
     print(cookie[16:])
 
 
