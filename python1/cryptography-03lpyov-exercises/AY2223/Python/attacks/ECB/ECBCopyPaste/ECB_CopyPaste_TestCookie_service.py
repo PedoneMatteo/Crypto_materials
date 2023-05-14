@@ -57,7 +57,7 @@ if __name__ == '__main__':
     print('Socket created')
 
     try:
-        s.bind((HOST, PORT+DELTA_PORT))
+        s.bind((HOST, PORT+DELTA_PORT)) #IL SERVER ASCOLTA SU UNA PORTA DIVERSA, CHE DERIVA DA QUELLA DI PRIMA + DELTA_PORT
     except socket.error as msg:
         print('Bind failed. Error Code : ' + str(msg[0]) + ' Message ' + msg[1])
         sys.exit()
@@ -71,11 +71,11 @@ if __name__ == '__main__':
         conn, addr = s.accept()
         print('A new encryption requested by ' + addr[0] + ':' + str(addr[1]))
 
-        received_cookie = conn.recv(1024)
-        cipher_dec = AES.new(key,AES.MODE_ECB)
+        received_cookie = conn.recv(1024)   #RICEZIONE DEL COOKIE CRIPTATO
+        cipher_dec = AES.new(key,AES.MODE_ECB)  #DECRIPTATO
 
         try:
-            decrypted = unpad(cipher_dec.decrypt(received_cookie),AES.block_size)
+            decrypted = unpad(cipher_dec.decrypt(received_cookie),AES.block_size)  #SI TOGLIE IL PADDING DAL RISULTATO DI PRIMA E SI OTTIENE IL MESSAGGIO DECRIPTATO
         except ValueError:
             print("Wrong padding")
             continue
@@ -84,7 +84,7 @@ if __name__ == '__main__':
 
         # only the administrator will have the admin field set to 1
         # when they show back, we recognize them
-        if b'role=admin' in decrypted:
+        if b'role=admin' in decrypted:      #CONTROLLO SE IL RUOLO È ADMIN O NO
             print("You are an admin!")
             conn.send("You are an admin!".encode())
         else:

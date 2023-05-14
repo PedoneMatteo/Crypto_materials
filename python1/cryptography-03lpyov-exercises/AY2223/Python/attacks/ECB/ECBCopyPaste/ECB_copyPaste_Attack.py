@@ -9,24 +9,26 @@ os.environ['PWNLIB_SILENT'] = 'True'
 
 from pwn import *
 
-from attacks.ECB.ECBCopyPaste.ECB_CopyPaste_server_genCookie_service import profile_for,encode_profile
+#FUNCTION FOR TRANFORMATION OF EMAIL IN THE STRING USED IN THE COOKIE
+from attacks.ECB.ECBCopyPaste.ECB_CopyPaste_server_genCookie_service import profile_for, encode_profile
 
 if __name__ == '__main__':
     server_gencookies = remote(HOST,PORT)
     email = b'aaaaaaa@b.com'
 
-    server_gencookies.send(email)
-    encrpyted_cookie = server_gencookies.recv(1024)
+    server_gencookies.send(email)   #SENDING TO THE SERVER THAT GENERATE THE COOKIE
+    encrpyted_cookie = server_gencookies.recv(1024) #ENCRYPTED COOKIE RECEIVED FROM THE SERVER
     print(encrpyted_cookie)
 
     cookie_info = encode_profile(profile_for(email.decode()))
     print(cookie_info)
-    print(cookie_info[0:16])
-    print(cookie_info[16:32])
+    print(cookie_info[0:16]) #FIRST BLOCK OF COOKIE INFO
+    print(cookie_info[16:32]) #SECOND BLOCK OF COOKIE INFO
 
-    padded_admin = b'A'*10 + pad( b'admin', AES.block_size)
+    padded_admin = b'A'*10 + pad( b'admin', AES.block_size) #LA PRIMA PARTE È LA MAIL FASULLA DA ATTACCARE ALLA STRINGA "ADMIN" CHE CI SERVE
     cookie_info = encode_profile(profile_for(padded_admin.decode()))
     print(cookie_info[0:16])
+    print(cookie_info[16:32])
     print(cookie_info[16:32].encode())
     server_gencookies.close()
 

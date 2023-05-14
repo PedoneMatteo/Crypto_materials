@@ -20,7 +20,7 @@ def profile_for(email):
     return dict
 
 ###############################
-def encode_profile(dict):
+def encode_profile(dict):   #GENERANO LE STRINGHE DAI DATI DELL'UTENTE UTILI PER POI GENERARE IL COOKIE
     # generates the string from user data
     """
     :type dict: dictionary
@@ -38,7 +38,7 @@ def encode_profile(dict):
 
 ###############################
 
-def encrypt_profile(encoded_profile):
+def encrypt_profile(encoded_profile):   #GENERAZIONE DEL COOKIE
     cipher = AES.new(key,AES.MODE_ECB)
     plaintext = pad(encoded_profile.encode(),AES.block_size)
     print(plaintext)
@@ -67,15 +67,15 @@ if __name__ == '__main__':
 
     #wait to accept a connection - blocking call
     while 1:
-        conn, addr = s.accept()
+        conn, addr = s.accept() #ACCETAZIONE DELLA CONNESSIONE
         print('A new encryption requested by ' + addr[0] + ':' + str(addr[1]))
 
-        email = conn.recv(1024)
-        cookie = encrypt_profile(encode_profile(profile_for(email.decode())))
+        email = conn.recv(1024) #PRENDE L'INDIRIZZO MAIL
+        cookie = encrypt_profile(encode_profile(profile_for(email.decode())))   #GENERAZIONE DEL COOKIE
 
         print("Cookie: " + encode_profile(profile_for(email.decode())))
 
-        conn.send(cookie)
+        conn.send(cookie)   #COOKIE MANDATO ALL'USER CHE HA RICHIESTO L'ACCESSO
         conn.close()
 
 
