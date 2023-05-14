@@ -8,7 +8,7 @@ from attacks.ECB.myconfig import HOST, PORT
 
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-print('Socket created')
+print('Socket created') 
 
 try:
     s.bind((HOST, PORT))
