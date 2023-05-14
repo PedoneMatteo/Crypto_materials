@@ -33,7 +33,7 @@ if __name__ == '__main__':
     #     for i in range(ceil(len(full_string)/AES.block_size)):
     #         print(full_string[i*16:(i+1)*16])
 
-    for guess in string.printable:
+    for guess in string.printable:  #string.printable cointains all the printable caracters
         message = postfix + guess.encode()
         server = remote (HOST,PORT)
         server.send(message)
