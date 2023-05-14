@@ -8,11 +8,11 @@ from attacks.ECB.myconfig import HOST, PORT
 
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-print('Socket created') 
+print('Socket created')
 
 try:
     s.bind((HOST, PORT))
-except socket.error as msg:
+except socket.error as msg: 
     print('Bind failed. Error Code : ' + str(msg[0]) + ' Message ' + msg[1])
     sys.exit()
 print('Socket bind complete')
