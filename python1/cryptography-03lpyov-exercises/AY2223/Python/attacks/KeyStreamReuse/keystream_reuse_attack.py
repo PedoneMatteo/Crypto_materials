@@ -30,7 +30,7 @@ print(len(shortest_c))
 #################################################
 # guess the first byte: naive approach: count the ascii chars
 
-counters = numpy.zeros(256,dtype=int)
+counters = numpy.zeros(256,dtype=int)   #vettore di 256 zeri
 
 for guessed_byte in range(256):
     for c in ciphertexts:
@@ -40,7 +40,7 @@ for guessed_byte in range(256):
 max_matches = max(counters)
 print(max_matches)
 
-match_list = [(counters[i],i) for i in range(256)]
+match_list = [(counters[i],i) for i in range(256)]  #GENERARE UNA LISTA CON LE COPPIE BYTE-VALORE NEL BYTE
 # print(match_list)
 ordered_match_list = sorted(match_list, reverse=True)
 # print(ordered_match_list)
@@ -165,7 +165,7 @@ for byte_to_guess in range(max_len):
 
 keystream = bytearray()
 for x in candidates_list:
-    keystream += x[0][1].to_bytes(1,byteorder='big')
+    keystream += x[0][1].to_bytes(1,byteorder='big')    #CREAZIONE DEL KEYSTREAM CON SOLO L'ELEMENTO PIÙ FREQUENTE
 
 from Crypto.Util.strxor import strxor
 

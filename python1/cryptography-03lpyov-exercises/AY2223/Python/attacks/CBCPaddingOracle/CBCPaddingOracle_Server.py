@@ -7,7 +7,7 @@ from attacks.CBCPaddingOracle.mysecrets import cbc_oracle_key as key
 from attacks.CBCPaddingOracle.myconfig import HOST, PORT
 
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print('Socket created')
 
 try:
